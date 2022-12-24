@@ -12,7 +12,7 @@ https://adventofcode.com/2022/day/9
 ---
 *Backstory* : You are following the elves across a bridge. You want to model the movement of a rope to pass the time.  The head knot pulls around the tail knot.  Figure out where the tail has been.
 
-*Strategy Selected* : Establish a coordinate plane, and a modeling engine that can deal with arbitrary head movements and calculate the tail movements, and log the results.
+*Strategy Selected* : Establish a coordinate plane, and a modeling engine that can deal with arbitrary head movements and calculate the tail movements, and log the results.  The tail always moves to the last head position when it moves.
 
 ## Part 2
 ---
@@ -29,3 +29,4 @@ https://adventofcode.com/2022/day/9
 ## Alternative Strategies
 ---
 - **Risk / Trap** : Can the tail ever go to a position that the head had not been?  I would think so.
+- **Risk / Trap** : You have to absolute value your distance comparisons.

@@ -3,9 +3,9 @@ const fs = require('fs');
 const fullData = JSON.parse(fs.readFileSync('source.json', 'utf-8'));
 const shortData = fullData.slice(0, 20);
 
-let data = shortData;
+let data = fullData;
 
-console.table(data);
+//console.table(data);
 
 /*  Plan
 Q : Do we know the initial size of the bridge?
@@ -22,15 +22,15 @@ Strat
 **/
 
 /* coorPlane[string '0,0'] = [int xCoor,int yCoor,bool headVisted,bool tailVisited] */
-let coorPlane = [];
-coorPlane['0,0'] = [0,0,true,true];
+let coorPlane = {};
+coorPlane['0,0'] = [0, 0, true, true];
 
 // ['name', xPos, yPos]
-let headPos = ['0,0',0,0];
-let tailPos = ['0,0',0,0];
+let headPos = ['0,0', 0, 0];
+let tailPos = ['0,0', 0, 0];
 
 // Model Knot Movement
-data.forEach((el,index) => {
+data.forEach((el, index) => {
     el = el.split(' ');
     dir = el[0];
     dist = el[1];
@@ -40,7 +40,9 @@ data.forEach((el,index) => {
     }
 });
 
-function moveHead (dir) {
+function moveHead(dir) {
+    curHead = [headPos[1], headPos[2]];
+
     // options U, R, D, L
     switch (dir) {
         case 'U':
@@ -60,27 +62,49 @@ function moveHead (dir) {
             break;
     }
 
-    const name = createName(headPos[1],headPos[2])
+    const name = createName(headPos[1], headPos[2])
 
     headPos[0] = name;
 
-    // create position always
-    createPosition(headPos[1],headPos[2]);
+    // create position will check if exists
+    createPosition(headPos[1], headPos[2]);
 
     // log visit
     coorPlane[name][2] = true;
+
+    // determine move needed
+    if (Math.abs(headPos[1] - tailPos[1]) > 1 || Math.abs(headPos[2] - tailPos[2]) > 1) {
+        moveTail(curHead);
+    }
 }
 
-function moveTail () {
-    // options N, NE, E, SE, S, SW, W, NW
+function moveTail(prevHeadPos) {
+    const name = createName(prevHeadPos[0], prevHeadPos[1]);
+    tailPos = [name, Number(prevHeadPos[0]), Number(prevHeadPos[1])];
+
+    // log visit
+    coorPlane[name][3] = true;
 }
 
-function createPosition (x,y) {
-    coorPlane[createName(x,y)] = [x,y,false,false];
+function createPosition(x, y) {
+    const name = createName(x, y);
+    if (coorPlane[name] === undefined) {
+        Object.defineProperty(coorPlane,String(name),{
+            enumerable : true,
+            value : [x, y, false, false]
+        });
+    }
 }
 
-function createName (x,y) {
+function createName(x, y) {
     return x + ',' + y;
 }
 
-console.table(coorPlane);
+//console.table(coorPlane);
+
+const filtered = [];
+Object.keys(coorPlane).forEach((el) => {
+    coorPlane[el][3] === true ? filtered.push(coorPlane[el]) : '';
+});
+
+console.table(filtered.length);
