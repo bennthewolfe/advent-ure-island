@@ -1,4 +1,5 @@
 // Run with node --inspect [filename] to debug
+// Run with node --watch index.js to watch for changes and run
 
 fs = require('fs');
 
