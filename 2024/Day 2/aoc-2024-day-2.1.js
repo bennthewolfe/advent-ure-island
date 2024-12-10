@@ -20,18 +20,31 @@ data = fullData;
 let successArray = [];
 
 data.forEach((element) => {
-    // determine sort order and normalized to asc
+    let sortedElement;
+    let sortOrder;
+
+    // determine sort order
     if (element[0] < element[element.length-1]) {
         // ascending
-    } else if (element.sort()[0] < element[element.length-1]) {
+        sortOrder = 'asc';
+        sortedElement = element.toSorted((a,b)=>a-b);
+    } else if (element[0] > element[element.length-1]) {
         // descending
+        sortOrder = 'desc';
+        sortedElement = element.toSorted((a,b)=>b-a);
     } else {
         // equal
         successArray.push(false);
         return false;
     }
 
-    if (! assessRules(element) ) { successArray.push(false); return false; }
+    if (sortedElement.toString() !== element.toString()) {
+        // array not sorted
+        successArray.push(false);
+        return false;
+    }
+
+    if (! assessRules(sortedElement) ) { successArray.push(false); return false; }
 
     // Pass
     successArray.push(true);
@@ -47,7 +60,7 @@ function assessRules (element) {
     return element.every(
         (val,index,arr) => {
             if (index > 0) {
-                let diff = val - arr[index-1];
+                let diff = Math.abs(val - arr[index-1]);
                 if (diff < 1 || diff > 3) {
                     return false;
                 }
