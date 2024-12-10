@@ -3,9 +3,9 @@ https://adventofcode.com/2024/day/3
 
 | Property | Score |
 |-------|---------|
-|*Difficulty* :|⭐⭐⭐⭐⭐|
-|*Fun* :|⭐⭐⭐⭐⭐|
-|*Time* :| Long (~3 hrs)|
+|*Difficulty* :|★☆☆☆☆|
+|*Fun* :|★★★★☆|
+|*Time* :| Short (1 hrs)|
 |*Overall* :|⭐⭐⭐⭐⭐|
 
 ⭐⭐⭐⭐⭐ 🌟🌟🌟🌟🌟 ☆☆☆☆☆ ★★★★★
@@ -18,9 +18,9 @@ https://adventofcode.com/2024/day/3
 
 ## Part 2
 ---
-*Backstory* :
+*Backstory* : There are do() and don't() commands that modify whether the mult should count.
 
-*Strategy Selected* : 
+*Strategy Selected* : Separate the string by don't() using split, and then look for the first do().
 
 ## Core Concepts :
 ---
@@ -31,5 +31,4 @@ https://adventofcode.com/2024/day/3
 
 ## Alternative Strategies
 ---
-- **Risk / Trap** : Tricky thing
-- 
+- **Risk** : RegEx is always tricky
