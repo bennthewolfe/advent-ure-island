@@ -20,7 +20,7 @@ data = [
 [1,3,6,7,9]
 ];
 
-console.table(data);
+// console.table(data);
 
 /* Strategy
 - FAIL : If I sort an increasing array and it changes
@@ -29,7 +29,7 @@ console.table(data);
 
 let successArray = [];
 
-data.forEach((element) => {
+data.forEach((element,index) => {
     // determine sort order and normalized to asc
     if (element[0] < element[element.length-1]) {
         // ascending
@@ -44,7 +44,7 @@ data.forEach((element) => {
     return true;   
 });
 
-console.table(successArray);
+// console.table(successArray);
 
 let successCount = successArray.filter((element) => element === true).length;
 console.log(`Success Count: ${successCount}`);
@@ -61,12 +61,14 @@ function assessRules (element) {
                     diff = val - arr[index-2];
                 }
                 if (diff < 1 || diff > 3) {
-                    if (lastFailed) {
+                    if (failures > 0) {
                         return false;
                     } else {
                         failures++;
                         lastFailed = true;
                     }
+                } else {
+                    lastFailed = false;
                 }
             }
             return true;
