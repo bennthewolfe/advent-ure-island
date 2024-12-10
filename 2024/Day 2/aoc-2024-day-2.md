@@ -14,13 +14,13 @@ https://adventofcode.com/2024/day/2
 ---
 *Backstory* : Checking on the Red-Nosed reactor to see if the reports on the levels are safe.
 
-*Strategy Selected* : 
+*Strategy Selected* : Check for failures in an `every()` loop.
 
 ## Part 2
 ---
 *Backstory* : The problem dampener allows for one failure.
 
-*Strategy Selected* : Change `every()` function to account for one failure.
+*Strategy Selected* : Use a delta array to see changes.
 
 ## Core Concepts :
 ---
@@ -34,4 +34,4 @@ https://adventofcode.com/2024/day/2
 ---
 - **Trap** : Array.sort() modifies the item. Old way : Use .slice() to make a copy before sorting.  New way : Use toSorted().
 - **Trap** : Array.every() looks for a return and stops on falsiness.
-- I tried to use the fact that arrays will or won't match after sorting as an efficiency play.
+- I tried to use the fact that arrays will or won't match after sorting as an efficiency play.  This was overall pretty dumb.  I eliminated this for part 2.

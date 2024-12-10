@@ -8,17 +8,7 @@ const shortData = fullData.slice(0,10);
 
 // Uncomment the fullData overwrite to run against the full dataset
 let data = shortData;
-data = fullData;
-
-data = [
-[1,2,3,10,11,15],
-[7,6,4,2,1],
-[1,2,7,8,9],
-[9,7,6,2,1],
-[1,3,2,4,5],
-[8,6,4,4,1],
-[1,3,6,7,9]
-];
+// data = fullData;
 
 // console.table(data);
 
@@ -29,49 +19,55 @@ data = [
 
 let successArray = [];
 
-data.forEach((element,index) => {
-    // determine sort order and normalized to asc
-    if (element[0] < element[element.length-1]) {
-        // ascending
-    } else if (element.sort()[0] < element[element.length-1]) {
-        // descending
-    }
+let delta1Array = [];
+let delta2Array = [];
 
-    if (! assessRules(element) ) { successArray.push(false); return false; }
+
+data.forEach((element,i) => {
+    let delta1 = [];
+    let delta2 = [];
+
+    // build delta arrays
+    element.every((val,index) => {
+        if (index === 0) {
+            return true;
+        } else if (index > 0) {
+            delta1.push(val - element[index-1]);
+            if (index > 1) {
+                delta2.push(val - element[index-2]);
+            }
+            return true;
+        }
+    });
+
+    delta1Array.push(delta1);
+    delta2Array.push(delta2);
+
+    if (! assessRules(element,i) ) {
+        successArray.push(false);
+        return false;
+    }
 
     // Pass
     successArray.push(true);
     return true;   
 });
 
-// console.table(successArray);
+console.table(data);
+console.table(delta1Array);
+console.table(delta2Array);
 
 let successCount = successArray.filter((element) => element === true).length;
 console.log(`Success Count: ${successCount}`);
 
-function assessRules (element) {
+function assessRules (element,i) {
+    let recordIndex = i;
+
     let failures = 0;
     let lastFailed = false;
 
-    return element.every(
-        (val,index,arr) => {
-            if (index > 0) {
-                let diff = val - arr[index-1];
-                if (lastFailed) {
-                    diff = val - arr[index-2];
-                }
-                if (diff < 1 || diff > 3) {
-                    if (failures > 0) {
-                        return false;
-                    } else {
-                        failures++;
-                        lastFailed = true;
-                    }
-                } else {
-                    lastFailed = false;
-                }
-            }
-            return true;
+    return delta1Array[i].every(
+        (val,index) => {
         }
-    )
+    );
 }
