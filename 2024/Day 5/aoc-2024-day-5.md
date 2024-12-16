@@ -25,10 +25,10 @@ https://adventofcode.com/2024/day/5
 ## Core Concepts :
 ---
 *Puzzle Keys* :
-- [Description](http://bennthewolfe.com) - Source.Net - Description
-- 
+- [Do... while](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while) - MDN Web Docs - Do... While loops
+- [Splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) - MDN Web Docs - Splice
 
 ## Alternative Strategies
 ---
-- **Risk / Trap** : Tricky thing
+- **Trap** : `every()` checks the return truthiness and will early exit if you hit a failure.
 - 
