@@ -12,13 +12,24 @@ data = fullData;
 
 let columnsData = [];
 
-// Create N <--> S Map
-data.forEach((row) => {
-    Array.from(row).forEach((char, index) => {
-        if (columnsData[index] === undefined) {
-            columnsData[index] = '';
+let guardPos = [0,0]
+
+// Create N <--> S Map and find the guard
+data.forEach((row, index) => {
+    Array.from(row).forEach((char, i) => {
+        if (columnsData[i] === undefined) {
+            columnsData[i] = '';
         }
-        columnsData[index] += char;
+        if (char === '^') {
+            guardPos = [i, index];
+            char = '.';
+
+            // Remove the guard from the original map
+            data[index] = data[index].split('');
+            data[index].splice(i, 1,'.');
+            data[index] = data[index].join('');
+        }
+        columnsData[i] += char;
     });
 });
 
@@ -28,3 +39,5 @@ console.table(data);
 // N <--> S Map
 console.log("N <--> S Map");
 console.table(columnsData);
+
+console.log("Guard Position: ", guardPos);
