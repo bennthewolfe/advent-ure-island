@@ -3,8 +3,8 @@ https://adventofcode.com/2025/day/2
 
 | Property | Score |
 |-------|---------|
-|*Difficulty* :|★★★★★☆☆☆☆☆|
-|*Fun* :|★★★★★☆☆☆☆☆|
+|*Difficulty* :|★★★★★|
+|*Fun* :|★★☆☆☆|
 |*Time* :| Long (~3 hrs)|
 |*Overall* :|★★★★★☆☆☆☆☆|
 
